@@ -3,7 +3,4 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="colorBotton">#65558F</color>
-    <color name="SUNRFACE">#FEF7FF</color>
-    <color name="gris">#D9D9D9</color>
-    <color name="sunrface_oscuro">#F3EDF7</color>
 </resources>
