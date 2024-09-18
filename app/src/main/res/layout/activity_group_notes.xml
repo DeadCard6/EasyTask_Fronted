@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".group_notes">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="272dp" >
+
+        <TextView
+            android:id="@+id/groupName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FAMILIA LOZA"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="34dp"
+            tools:layout_editor_absoluteY="84dp" />
+
+        <TextView
+            android:id="@+id/groupId"
+            android:layout_width="78dp"
+            android:layout_height="26dp"
+            android:text="ID: 202415"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="224dp"
+            tools:layout_editor_absoluteY="90dp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No se han encontrado notas en este grupo"
+            android:textColor="#757575"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="61dp"
+            tools:layout_editor_absoluteY="139dp" />
+
+        <ImageButton
+            android:id="@+id/func_button"
+            android:layout_width="101dp"
+            android:layout_height="82dp"
+            android:background="#00FFFFFF"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_function"
+            tools:layout_editor_absoluteX="301dp"
+            tools:layout_editor_absoluteY="573dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="411dp"
+        android:layout_height="65dp"
+        android:background="#ECE6F0"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/brandname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="EasyTask"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/menu_button"
+        android:layout_width="69dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="10dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/newGroup_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_menu" />
+
+    <ImageButton
+        android:id="@+id/profile_button"
+        android:layout_width="54dp"
+        android:layout_height="66dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="665dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_profile" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:background="#ECE6F0"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/add_button"
+                android:layout_width="56dp"
+                android:layout_height="47dp"
+                android:background="#00FFFFFF"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_add" />
+
+            <ImageButton
+                android:id="@+id/home_button"
+                android:layout_width="52dp"
+                android:layout_height="42dp"
+                android:background="#00FFFFFF"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.091"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_home" />
+
+            <ImageButton
+                android:id="@+id/groups_button"
+                android:layout_width="56dp"
+                android:layout_height="47dp"
+                android:background="#00FFFFFF"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.923"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.521"
+                app:srcCompat="@drawable/ic_groups" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
