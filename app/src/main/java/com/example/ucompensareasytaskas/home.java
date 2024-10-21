@@ -14,11 +14,15 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.ucompensareasytaskas.Groups.HomeGroups;
+import com.example.ucompensareasytaskas.Groups.newNote;
 import com.example.ucompensareasytaskas.Register.registerNameAndLastName;
 
 public class home extends AppCompatActivity {
 
     ImageButton groups_button;
+    ImageButton home_button;
+    ImageButton add_button;
+    ImageButton menu_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +36,17 @@ public class home extends AppCompatActivity {
         });
 
         groups_button=(ImageButton)findViewById(R.id.groups_button);
+        home_button=(ImageButton)findViewById(R.id.home_button);
+        add_button=(ImageButton)findViewById(R.id.add_button);
+        menu_button=(ImageButton)findViewById(R.id.menu_button);
 
+        menu_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(home.this, menu.class);
+                startActivity(i);
+            }
+        });
         groups_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,5 +54,20 @@ public class home extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        home_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(home.this, home.class);
+                startActivity(i);
+            }
+        });
+        add_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(home.this, newNote.class);
+                startActivity(i);
+            }
+        });
+
     }
 }

@@ -41,7 +41,7 @@
                     android:background="@drawable/style_borde">
 
                     <Button
-                        android:id="@+id/button5"
+                        android:id="@+id/perfil_button"
                         android:layout_width="364dp"
                         android:layout_height="60dp"
                         android:layout_weight="1"
@@ -128,7 +128,7 @@
                     android:background="@drawable/style_borde">
 
                     <Button
-                        android:id="@+id/button5"
+                        android:id="@+id/perfil_button"
                         android:layout_width="364dp"
                         android:layout_height="62dp"
                         android:layout_weight="1"
@@ -215,7 +215,7 @@
                     android:background="@drawable/style_borde">
 
                     <Button
-                        android:id="@+id/button5"
+                        android:id="@+id/perfil_button"
                         android:layout_width="364dp"
                         android:layout_height="62dp"
                         android:layout_weight="1"
@@ -375,10 +375,11 @@
                     android:id="@+id/menu_button"
                     android:layout_width="130dp"
                     android:layout_height="70dp"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="4dp"
                     android:background="@color/SUNRFACE"
                     android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/menu_button" />

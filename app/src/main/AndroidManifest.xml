@@ -38,6 +38,22 @@
             android:exported="true">
         </activity>
         <activity
+            android:name=".menu"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".menuCambiarContrasena"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".menuPerfil"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".cerrarSesion"
+            android:exported="true">
+        </activity>
+        <activity
             android:name=".Groups.HomeGroups"
             android:exported="true">
         </activity>

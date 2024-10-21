@@ -13,11 +13,16 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.ucompensareasytaskas.R;
 import com.example.ucompensareasytaskas.home;
+import com.example.ucompensareasytaskas.menu;
 
 public class HomeGroups extends AppCompatActivity {
 
     ImageButton newGroup_button;
     ImageButton joinGroup_button;
+    ImageButton groups_button;
+    ImageButton home_button;
+    ImageButton add_button;
+    ImageButton menu_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +36,18 @@ public class HomeGroups extends AppCompatActivity {
         });
         newGroup_button=(ImageButton)findViewById(R.id.newGroup_button);
         joinGroup_button=(ImageButton)findViewById(R.id.joinGroup_button);
+        groups_button=(ImageButton)findViewById(R.id.groups_button);
+        home_button=(ImageButton)findViewById(R.id.home_button);
+        add_button=(ImageButton)findViewById(R.id.add_button);
+        menu_button=(ImageButton)findViewById(R.id.menu_button);
 
+        menu_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(HomeGroups.this, menu.class);
+                startActivity(i);
+            }
+        });
 
         newGroup_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +60,28 @@ public class HomeGroups extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(HomeGroups.this, joinGroupId.class);
+                startActivity(i);
+            }
+        });
+
+        groups_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(HomeGroups.this, HomeGroups.class);
+                startActivity(i);
+            }
+        });
+        home_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(HomeGroups.this, home.class);
+                startActivity(i);
+            }
+        });
+        add_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(HomeGroups.this, newNote.class);
                 startActivity(i);
             }
         });
