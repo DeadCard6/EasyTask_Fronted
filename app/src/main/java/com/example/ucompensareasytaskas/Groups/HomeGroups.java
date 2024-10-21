@@ -1,6 +1,9 @@
 package com.example.ucompensareasytaskas.Groups;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,8 +12,12 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.ucompensareasytaskas.R;
+import com.example.ucompensareasytaskas.home;
 
 public class HomeGroups extends AppCompatActivity {
+
+    ImageButton newGroup_button;
+    ImageButton joinGroup_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +28,24 @@ public class HomeGroups extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+        newGroup_button=(ImageButton)findViewById(R.id.newGroup_button);
+        joinGroup_button=(ImageButton)findViewById(R.id.joinGroup_button);
+
+
+        newGroup_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(HomeGroups.this, newGroupName.class);
+                startActivity(i);
+            }
+        });
+        joinGroup_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(HomeGroups.this, joinGroupId.class);
+                startActivity(i);
+            }
         });
     }
 }

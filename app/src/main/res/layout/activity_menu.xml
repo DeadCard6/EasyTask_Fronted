@@ -33,7 +33,7 @@
                 app:srcCompat="@drawable/add_circle" />
 
             <ImageView
-                android:id="@+id/Groups_button"
+                android:id="@+id/groups_button"
                 android:layout_width="114dp"
                 android:layout_height="58dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -51,7 +51,7 @@
                 android:background="#00FFFFFF"
                 android:scaleType="fitCenter"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/Groups_button"
+                app:layout_constraintEnd_toEndOf="@+id/groups_button"
                 app:layout_constraintHorizontal_bias="0.004"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

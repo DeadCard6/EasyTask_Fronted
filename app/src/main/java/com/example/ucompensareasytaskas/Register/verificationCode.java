@@ -1,6 +1,9 @@
 package com.example.ucompensareasytaskas.Register;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,9 +12,12 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.ucompensareasytaskas.R;
+import com.example.ucompensareasytaskas.loginHome;
 
 public class verificationCode extends AppCompatActivity {
 
+    Button  cancel_button;
+    Button  verify_button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +27,25 @@ public class verificationCode extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+        verify_button=(Button)findViewById(R.id.verify_button);
+        cancel_button=(Button)findViewById(R.id.cancel_button);
+
+
+        verify_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(verificationCode.this, registerNameAndLastName.class);
+                startActivity(i);
+            }
+        });
+        cancel_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(verificationCode.this, registerPhone.class);
+                startActivity(i);
+            }
         });
     }
 }
