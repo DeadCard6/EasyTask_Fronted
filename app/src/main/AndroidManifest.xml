@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.ucompensareasytaskas">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -15,7 +18,7 @@
         tools:targetApi="31">
         <activity
             android:name=".Register.profileUsername"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".loginHome"
             android:exported="true">
@@ -25,6 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".Register.confirmPassword"
             android:exported="false" />
@@ -70,10 +74,12 @@
         <activity
             android:name=".Groups.newNote"
             android:exported="true"></activity>
+
         <activity
             android:name=".Register.verificationCode"
             android:exported="true">
             <intent-filter>
+
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -110,5 +116,9 @@
             </intent-filter>
         </activity>
     </application>
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>
