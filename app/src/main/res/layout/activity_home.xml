@@ -41,7 +41,7 @@
                     android:background="@drawable/style_borde">
 
                     <Button
-                        android:id="@+id/perfil_button"
+                        android:id="@+id/noteOne_button"
                         android:layout_width="364dp"
                         android:layout_height="60dp"
                         android:layout_weight="1"
@@ -54,7 +54,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textView3"
+                        android:id="@+id/descripcion_txt"
                         android:layout_width="277dp"
                         android:layout_height="20dp"
                         android:scaleType="fitCenter"
@@ -68,7 +68,7 @@
                         app:layout_constraintVertical_bias="1.0" />
 
                     <ImageButton
-                        android:id="@+id/imageButton12"
+                        android:id="@+id/imageNote_button"
                         android:layout_width="48dp"
                         android:layout_height="42dp"
                         android:background="#00FFFFFF"
@@ -81,7 +81,7 @@
                         app:srcCompat="@drawable/image_button" />
 
                     <ImageButton
-                        android:id="@+id/imageButton13"
+                        android:id="@+id/configNote_button"
                         android:layout_width="13dp"
                         android:layout_height="16dp"
                         android:background="#00FFFFFF"
@@ -95,7 +95,7 @@
                         app:srcCompat="@drawable/tuerca" />
 
                     <TextView
-                        android:id="@+id/textView3"
+                        android:id="@+id/titleNote_txt"
                         android:layout_width="67dp"
                         android:layout_height="19dp"
                         android:scaleType="fitCenter"
@@ -128,7 +128,7 @@
                     android:background="@drawable/style_borde">
 
                     <Button
-                        android:id="@+id/perfil_button"
+                        android:id="@+id/trashNote_button"
                         android:layout_width="364dp"
                         android:layout_height="62dp"
                         android:layout_weight="1"
@@ -141,7 +141,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textView3"
+                        android:id="@+id/descripcionTrash_txt"
                         android:layout_width="277dp"
                         android:layout_height="20dp"
                         android:scaleType="fitCenter"
@@ -155,7 +155,7 @@
                         app:layout_constraintVertical_bias="1.0" />
 
                     <TextView
-                        android:id="@+id/textView3"
+                        android:id="@+id/titleTrash_txt"
                         android:layout_width="106dp"
                         android:layout_height="28dp"
                         android:scaleType="fitCenter"
@@ -168,7 +168,7 @@
                         app:layout_constraintVertical_bias="0.093" />
 
                     <ImageButton
-                        android:id="@+id/imageButton12"
+                        android:id="@+id/imageTrash_button"
                         android:layout_width="48dp"
                         android:layout_height="42dp"
                         android:background="#00FFFFFF"
@@ -181,7 +181,7 @@
                         app:srcCompat="@drawable/image_button" />
 
                     <ImageButton
-                        android:id="@+id/imageButton13"
+                        android:id="@+id/configTrash_button"
                         android:layout_width="13dp"
                         android:layout_height="16dp"
                         android:background="#00FFFFFF"
@@ -215,7 +215,7 @@
                     android:background="@drawable/style_borde">
 
                     <Button
-                        android:id="@+id/perfil_button"
+                        android:id="@+id/listNote_button"
                         android:layout_width="364dp"
                         android:layout_height="62dp"
                         android:layout_weight="1"
@@ -228,7 +228,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textView3"
+                        android:id="@+id/descripcionList_txt"
                         android:layout_width="277dp"
                         android:layout_height="20dp"
                         android:scaleType="fitCenter"
@@ -242,7 +242,7 @@
                         app:layout_constraintVertical_bias="1.0" />
 
                     <TextView
-                        android:id="@+id/textView3"
+                        android:id="@+id/titleList_txt"
                         android:layout_width="67dp"
                         android:layout_height="19dp"
                         android:scaleType="fitCenter"
@@ -255,7 +255,7 @@
                         app:layout_constraintVertical_bias="0.0" />
 
                     <ImageButton
-                        android:id="@+id/imageButton12"
+                        android:id="@+id/imageList_button"
                         android:layout_width="48dp"
                         android:layout_height="42dp"
                         android:background="#00FFFFFF"
@@ -268,7 +268,7 @@
                         app:srcCompat="@drawable/image_button" />
 
                     <ImageButton
-                        android:id="@+id/imageButton13"
+                        android:id="@+id/configList_button"
                         android:layout_width="13dp"
                         android:layout_height="16dp"
                         android:background="#00FFFFFF"
@@ -347,7 +347,8 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:layout_width="match_parent"
