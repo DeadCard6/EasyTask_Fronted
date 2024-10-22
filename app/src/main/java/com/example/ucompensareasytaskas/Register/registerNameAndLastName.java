@@ -34,7 +34,7 @@ public class registerNameAndLastName extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent i = new Intent(registerNameAndLastName.this, home.class);
+                Intent i = new Intent(registerNameAndLastName.this, profileUsername.class);
                 startActivity(i);
             }
         });

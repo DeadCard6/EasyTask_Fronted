@@ -25,9 +25,10 @@
             <ImageButton
                 android:id="@+id/add_button"
                 android:layout_width="56dp"
-                android:layout_height="47dp"
+                android:layout_height="48dp"
                 android:background="#00FFFFFF"
                 android:scaleType="fitCenter"
+                android:contentDescription="add_button_description"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -37,9 +38,10 @@
             <ImageButton
                 android:id="@+id/home_button"
                 android:layout_width="52dp"
-                android:layout_height="42dp"
+                android:layout_height="48dp"
                 android:background="#00FFFFFF"
                 android:scaleType="fitCenter"
+                android:contentDescription="home_button_description"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.091"
@@ -50,8 +52,9 @@
             <ImageButton
                 android:id="@+id/groups_button"
                 android:layout_width="56dp"
-                android:layout_height="47dp"
+                android:layout_height="48dp"
                 android:background="#00FFFFFF"
+                android:contentDescription="groups_button_description"
                 android:scaleType="fitCenter"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -85,6 +88,7 @@
                     android:id="@+id/profile_button"
                     android:layout_width="93dp"
                     android:layout_height="63dp"
+                    android:contentDescription="profile_button_description"
                     android:layout_marginTop="4dp"
                     android:background="@color/SUNRFACE"
                     android:scaleType="fitCenter"
@@ -98,6 +102,7 @@
                     android:layout_height="70dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
+                    android:contentDescription="menu_button_description"
                     android:background="@color/SUNRFACE"
                     android:scaleType="fitCenter"
                     app:layout_constraintStart_toStartOf="parent"
@@ -132,7 +137,7 @@
         app:layout_constraintTop_toBottomOf="@+id/header">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+            android:layout_width="233dp"
             android:layout_height="match_parent">
 
             <TextView
@@ -184,9 +189,9 @@
                 app:layout_constraintVertical_bias="0.693" />
 
             <EditText
-                android:id="@+id/confirmPassword_input"
+                android:id="@+id/confirmNombre_input"
                 android:layout_width="198dp"
-                android:layout_height="39dp"
+                android:layout_height="48dp"
                 android:background="@drawable/edittext_rounded"
                 android:hint="Value"
                 android:padding="10dp"
@@ -200,9 +205,9 @@
                 app:layout_constraintVertical_bias="0.142" />
 
             <EditText
-                android:id="@+id/confirmPassword_input"
+                android:id="@+id/confirmApellido_input"
                 android:layout_width="198dp"
-                android:layout_height="39dp"
+                android:layout_height="48dp"
                 android:background="@drawable/edittext_rounded"
                 android:hint="Value"
                 android:padding="10dp"
@@ -216,9 +221,9 @@
                 app:layout_constraintVertical_bias="0.361" />
 
             <EditText
-                android:id="@+id/confirmPassword_input"
+                android:id="@+id/confirmTelefono_input"
                 android:layout_width="198dp"
-                android:layout_height="39dp"
+                android:layout_height="48dp"
                 android:background="@drawable/edittext_rounded"
                 android:hint="Value"
                 android:padding="10dp"
@@ -232,9 +237,9 @@
                 app:layout_constraintVertical_bias="0.592" />
 
             <EditText
-                android:id="@+id/confirmPassword_input"
+                android:id="@+id/confirGmail_input"
                 android:layout_width="198dp"
-                android:layout_height="39dp"
+                android:layout_height="48dp"
                 android:background="@drawable/edittext_rounded"
                 android:hint="Value"
                 android:padding="10dp"
@@ -250,7 +255,7 @@
             <Button
                 android:id="@+id/confirmar_button"
                 android:layout_width="118dp"
-                android:layout_height="42dp"
+                android:layout_height="48dp"
                 android:text="Confirmar"
                 app:cornerRadius="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
