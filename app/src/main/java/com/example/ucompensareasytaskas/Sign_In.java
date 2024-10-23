@@ -10,18 +10,18 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.FirebaseException;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.PhoneAuthCredential;
-import com.google.firebase.auth.PhoneAuthOptions;
-import com.google.firebase.auth.PhoneAuthProvider;
+import com.example.ucompensareasytaskas.api.model.ApiResponse;
+import com.example.ucompensareasytaskas.api.model.LoginRequest;
+import com.example.ucompensareasytaskas.api.ApiService;
+import com.example.ucompensareasytaskas.api.RetrofitClient;
 
-import java.util.concurrent.TimeUnit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Sign_In extends AppCompatActivity {
 
-    private FirebaseAuth auth;
-    private EditText loginNumInput;
+    private EditText loginNumInput, loginPassInput;
     private Button enterButton;
 
     @Override
@@ -29,50 +29,58 @@ public class Sign_In extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        auth = FirebaseAuth.getInstance();
-
         loginNumInput = findViewById(R.id.loginNum_input);
+        loginPassInput = findViewById(R.id.loginPass_input);
         enterButton = findViewById(R.id.enter_button);
 
         enterButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                String phoneNumber = loginNumInput.getText().toString().trim();
-                if (phoneNumber.isEmpty()) {
-                    Toast.makeText(Sign_In.this, "Ingrese un número de celular", Toast.LENGTH_SHORT).show();
-                } else {
-                    sendVerificationCode(phoneNumber);
-                }
+            public void onClick(View view) {
+                loginUser();
             }
         });
     }
 
-    private void sendVerificationCode(String phoneNumber) {
-        PhoneAuthOptions options = PhoneAuthOptions.newBuilder(auth)
-                .setPhoneNumber(phoneNumber)       // El número de teléfono a verificar
-                .setTimeout(60L, TimeUnit.SECONDS) // Tiempo de espera
-                .setActivity(this)                 // Actividad actual
-                .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-                    @Override
-                    public void onVerificationCompleted(PhoneAuthCredential credential) {
-                        // Verificación completada automáticamente
-                    }
+    private void loginUser() {
+        // Obtener los valores ingresados por el usuario
+        String phoneNumber = loginNumInput.getText().toString().trim();
+        String password = loginPassInput.getText().toString().trim();
 
-                    @Override
-                    public void onVerificationFailed(FirebaseException e) {
-                        Log.e("Sign_In", "Error: " + e.getMessage());
-                        Toast.makeText(Sign_In.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+        if (phoneNumber.isEmpty() || password.isEmpty()) {
+            Toast.makeText(Sign_In.this, "Por favor ingresa todos los campos", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-                    @Override
-                    public void onCodeSent(String verificationId, PhoneAuthProvider.ForceResendingToken token) {
-                        // Guardar el ID de verificación y continuar a la pantalla OTP
-                        Intent intent = new Intent(Sign_In.this, VerificationOTP.class);
-                        intent.putExtra("verificationId", verificationId);
-                        startActivity(intent);
-                    }
-                })
-                .build();
-        PhoneAuthProvider.verifyPhoneNumber(options);
+        // Crear el objeto LoginRequest
+        LoginRequest loginRequest = new LoginRequest(phoneNumber, password);
+
+        // Llamar al servicio de API
+        ApiService apiService = RetrofitClient.getApiService();
+        Call<ApiResponse> call = apiService.loginUser(loginRequest);
+
+        // Realizar la llamada de la API
+        call.enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    // Aquí puedes manejar la respuesta del servidor en caso de éxito
+                    Toast.makeText(Sign_In.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
+
+                    // Ir a la siguiente pantalla (home)
+                    Intent intent = new Intent(Sign_In.this, home.class);
+                    startActivity(intent);
+                } else {
+                    // Manejar error en la autenticación
+                    Toast.makeText(Sign_In.this, "Error en el inicio de sesión", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+                // Manejar fallo de conexión
+                Log.e("API Error", t.getMessage());
+                Toast.makeText(Sign_In.this, "Fallo en la conexión", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
