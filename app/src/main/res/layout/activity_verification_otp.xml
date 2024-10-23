@@ -5,9 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Sign_In"
-    android:gravity="center"
-    android:orientation="vertical">
+    tools:context=".VerificationOTP">
 
 
     <androidx.cardview.widget.CardView
@@ -30,61 +28,59 @@
             android:orientation="vertical"
             android:padding="20dp">
 
-
             <TextView
-                android:id="@+id/texttitle"
+                android:id="@+id/textNumerodecelular_1SigIn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="30dp"
-                android:text="Inicio de sesión"
-                android:textAlignment="center"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textCelular"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Celular"
+                android:text="Codigo de Verificacion"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/loginNum_input"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/custom_edittext"
-                android:ems="10"
-                android:hint="  Numero de Celular"
-                android:inputType="phone" />
-
-            <EditText
-                android:id="@+id/loginPass_input"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/custom_edittext"
-                android:ems="10"
-                android:hint="  Contraseña"
-                android:inputType="text" />
-
-            <Button
-                android:id="@+id/enter_button"
+            <TextView
+                android:id="@+id/textNumerodecelular_2SigIn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="Iniciar Sesión" />
+                android:layout_marginTop="8dp"
+                android:text="Por favor ingrese el codigo de verificacion enviado al numero de celular"
+                android:textColor="#757575"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
+            <EditText
+                android:id="@+id/viewCode_inputSignIn"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="Campo para ingresar el código OTP" />
+
+            <!-- LinearLayout horizontal para los botones -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="18dp">
+
+                <Button
+                    android:id="@+id/cancel_buttonOTP"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/white"
+                    android:text="Cancelar"
+                    android:textColor="#000000" />
+
+                <Button
+                    android:id="@+id/verify_buttonOTP"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Verificar" />
+
+            </LinearLayout>
 
         </LinearLayout>
-
 
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "112536834092",
+    "project_id": "easytask-488a1",
+    "storage_bucket": "easytask-488a1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:112536834092:android:e09926dc5d727561230189",
+        "android_client_info": {
+          "package_name": "com.example.ucompensareasytaskas"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1zpul44CPWEtu1UWAdUtaATxIVYhvtfs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

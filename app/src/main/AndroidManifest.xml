@@ -6,6 +6,11 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -16,6 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UcompensarEasyTaskAS"
         tools:targetApi="31">
+        <activity
+            android:name=".VerificationOTP"
+            android:exported="false" />
         <activity
             android:name=".Register.profileUsername"
             android:exported="true" />
@@ -28,7 +36,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Register.confirmPassword"
             android:exported="false" />
@@ -43,43 +50,41 @@
         </activity>
         <activity
             android:name=".home"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".menu"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".menuCambiarContrasena"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".menuPerfil"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".cerrarSesion"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".Groups.HomeGroups"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".Groups.joinGroupId"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".Groups.newGroupName"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".Groups.groupNotes"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".Groups.groupCreated"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".Groups.newNote"
-            android:exported="true"></activity>
-
+            android:exported="true" />
         <activity
             android:name=".Register.verificationCode"
             android:exported="true">
             <intent-filter>
-
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -125,15 +130,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
     </application>
-
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-
-
-
 
 </manifest>
