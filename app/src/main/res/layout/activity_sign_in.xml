@@ -58,6 +58,14 @@
                 android:ems="10"
                 android:hint="  Numero de Celular" />
 
+            <TextView
+                android:id="@+id/textPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Contraseña"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
             <EditText
                 android:id="@+id/loginPass_input"
                 android:layout_width="match_parent"
