@@ -42,10 +42,10 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textUsuario"
+                android:id="@+id/textCelular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Usuario"
+                android:text="Celular"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -56,7 +56,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/custom_edittext"
                 android:ems="10"
-                android:hint="  Usuario"
+                android:hint="  Numero de Celular"
                 android:inputType="text" />
 
             <TextView
