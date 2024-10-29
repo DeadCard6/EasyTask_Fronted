@@ -15,6 +15,8 @@ import com.example.ucompensareasytaskas.api.model.LoginRequest;
 import com.example.ucompensareasytaskas.api.ApiService;
 import com.example.ucompensareasytaskas.api.RetrofitClient;
 
+import java.io.IOException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -64,23 +66,33 @@ public class Sign_In extends AppCompatActivity {
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     // Aquí puedes manejar la respuesta del servidor en caso de éxito
-                    Toast.makeText(Sign_In.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Sign_In.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
                     // Ir a la siguiente pantalla (home)
                     Intent intent = new Intent(Sign_In.this, home.class);
                     startActivity(intent);
                 } else {
                     // Manejar error en la autenticación
-                    Toast.makeText(Sign_In.this, "Error en el inicio de sesión", Toast.LENGTH_SHORT).show();
+                    try {
+                        // Leer el cuerpo de la respuesta para mostrar el mensaje de error
+                        String errorResponse = response.errorBody().string();
+                        Toast.makeText(Sign_In.this, errorResponse, Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
+
+
+
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {
-                // Manejar fallo de conexión
+                // Manejar fallo de conexión o excepciones
                 Log.e("API Error", t.getMessage());
-                Toast.makeText(Sign_In.this, "Fallo en la conexión", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Sign_In.this, "Fallo en la conexión: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 }

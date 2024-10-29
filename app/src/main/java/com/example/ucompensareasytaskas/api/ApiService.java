@@ -13,6 +13,6 @@ public interface ApiService {
     @POST("/register")
     Call<ApiResponse> registerUser(@Body User user);
 
-    @POST("/login")
+    @POST("/api/users/login")
     Call<ApiResponse> loginUser(@Body LoginRequest loginRequest);
 }
