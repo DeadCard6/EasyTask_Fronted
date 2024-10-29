@@ -136,15 +136,15 @@
         android:layout_width="167dp"
         android:layout_height="67dp"
         android:background="#00FFFFFF"
-        android:scaleType="fitCenter"
         android:contentDescription="newGroup_button_description"
+        android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.122"
+        app:layout_constraintHorizontal_bias="0.109"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.108"
-        app:srcCompat="@drawable/ic_joingroup" />
+        app:layout_constraintVertical_bias="0.109"
+        app:srcCompat="@drawable/ic_newgroup" />
 
     <ImageButton
         android:id="@+id/joinGroup_button"

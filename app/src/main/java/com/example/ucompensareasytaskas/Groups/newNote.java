@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -65,9 +66,37 @@ public class newNote extends AppCompatActivity {
         imageButton = findViewById(R.id.image_button);  // Botón para seleccionar imagen
 
         imageButton.setOnClickListener(v -> showImagePickerDialog());
-
+        menu_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(newNote.this, menu.class);
+                startActivity(i);
+            }
+        });
+        groups_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(newNote.this, HomeGroups.class);
+                startActivity(i);
+            }
+        });
+        home_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(newNote.this, home.class);
+                startActivity(i);
+            }
+        });
+        add_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(newNote.this, newNote.class);
+                startActivity(i);
+            }
+        });
         // Otros botones y eventos omitidos por brevedad
     }
+
 
     // Mostrar opciones para seleccionar imagen o tomar foto
     private void showImagePickerDialog() {
@@ -148,5 +177,6 @@ public class newNote extends AppCompatActivity {
                 }
             }
         }
+
     }
 }
