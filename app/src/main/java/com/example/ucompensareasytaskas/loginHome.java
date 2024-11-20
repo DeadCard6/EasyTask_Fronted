@@ -78,7 +78,7 @@ public class loginHome extends AppCompatActivity {
         registro_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(loginHome.this, registerPhone.class);
+                Intent i = new Intent(loginHome.this, registerUser.class);
                 startActivity(i);
             }
         });
