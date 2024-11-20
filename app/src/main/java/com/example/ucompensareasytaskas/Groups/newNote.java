@@ -1,41 +1,25 @@
 package com.example.ucompensareasytaskas.Groups;
 
-import android.content.Intent;
+import android.Manifest;
+import android.app.TimePickerDialog;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.net.Uri;
+import android.location.Location;
 import android.os.Bundle;
-import android.provider.MediaStore;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
-
-import android.content.pm.PackageManager;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
-import androidx.activity.EdgeToEdge;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-import android.Manifest;
-
 import com.example.ucompensareasytaskas.R;
 import com.example.ucompensareasytaskas.api.ApiService;
 import com.example.ucompensareasytaskas.api.RetrofitClient;
 import com.example.ucompensareasytaskas.api.model.Note;
 import com.example.ucompensareasytaskas.api.model.User;
-import com.example.ucompensareasytaskas.home;
-import com.example.ucompensareasytaskas.menu;
-
-import java.io.File;
-import java.io.IOException;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -46,133 +30,167 @@ import retrofit2.Response;
 
 public class newNote extends AppCompatActivity {
 
-    private ImageButton imageButton;
-    private String currentPhotoPath;
-    private final ApiService apiService = RetrofitClient.getApiService();
-
-    private static final int REQUEST_IMAGE_GALLERY = 1;
-    private static final int REQUEST_IMAGE_CAMERA = 2;
+    private ImageButton clockButton;
+    private int selectedHour = 0;
+    private int selectedMinute = 0;
+    private String currentPhotoPath = null;
+    private static final int REQUEST_LOCATION_PERMISSION = 3;
+    private double latitude = 0.0;
+    private double longitude = 0.0;
+    private ApiService apiService = RetrofitClient.getApiService();
+    private boolean locationFetched = false; // Add this line to declare and initialize the flag
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_note);
 
-        imageButton = findViewById(R.id.image_button);
+        clockButton = findViewById(R.id.clock_button);
 
-        imageButton.setOnClickListener(v -> showImagePickerDialog());
+        findViewById(R.id.map_button).setOnClickListener(v -> checkLocationPermission());
+
+        clockButton.setOnClickListener(v -> openTimePickerDialog());
 
         findViewById(R.id.confirmar_button).setOnClickListener(v -> createNote());
+
+        getLocation();
     }
 
-    private void showImagePickerDialog() {
-        String[] options = {"Seleccionar de galería", "Tomar una foto"};
-        new androidx.appcompat.app.AlertDialog.Builder(this)
-                .setTitle("Elige una opción")
-                .setItems(options, (dialog, which) -> {
-                    if (which == 0) {
-                        selectImageFromGallery();
-                    } else {
-                        dispatchTakePictureIntent();
-                    }
-                })
-                .show();
-    }
-
-    private void selectImageFromGallery() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent, REQUEST_IMAGE_GALLERY);
-    }
-
-    private void dispatchTakePictureIntent() {
-        File photoFile;
-        try {
-            photoFile = createImageFile();
-            Uri photoURI = FileProvider.getUriForFile(
-                    this,
-                    "com.example.ucompensareasytaskas.provider",
-                    photoFile
-            );
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-            startActivityForResult(intent, REQUEST_IMAGE_CAMERA);
-        } catch (IOException e) {
-            Toast.makeText(this, "Error al crear archivo de imagen", Toast.LENGTH_SHORT).show();
+    private void checkLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
+        } else {
+            getLocation();
         }
     }
 
-    private File createImageFile() throws IOException {
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
-        File storageDir = getExternalFilesDir(null);
-        File image = File.createTempFile(
-                "JPEG_" + timeStamp + "_",
-                ".jpg",
-                storageDir
-        );
-        currentPhotoPath = image.getAbsolutePath();
-        return image;
-    }
+    private void getLocation() {
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            if (requestCode == REQUEST_IMAGE_GALLERY && data != null) {
-                Uri selectedImageUri = data.getData();
-                imageButton.setImageURI(selectedImageUri);
-                currentPhotoPath = selectedImageUri.toString();
-            } else if (requestCode == REQUEST_IMAGE_CAMERA) {
-                File file = new File(currentPhotoPath);
-                if (file.exists()) {
-                    Uri uri = Uri.fromFile(file);
-                    imageButton.setImageURI(uri);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
+            return;
+        }
+
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
+
+                // Ensure that the Toast is only shown once
+                if (!locationFetched) {
+                    Toast.makeText(newNote.this, "Lat: " + latitude + " Long: " + longitude, Toast.LENGTH_SHORT).show();
+                    locationFetched = true; // Set the flag to true once location is fetched
                 }
             }
-        }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {}
+
+            @Override
+            public void onProviderEnabled(String provider) {}
+
+            @Override
+            public void onProviderDisabled(String provider) {}
+        });
+    }
+
+    private void openTimePickerDialog() {
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, (view, hourOfDay, minute) -> {
+            selectedHour = hourOfDay;
+            selectedMinute = minute;
+
+            String time = String.format("%02d:%02d", selectedHour, selectedMinute);
+            Toast.makeText(newNote.this, "Hora seleccionada: " + time, Toast.LENGTH_SHORT).show();
+        }, selectedHour, selectedMinute, true);
+        timePickerDialog.setButton(TimePickerDialog.BUTTON_POSITIVE, "Aceptar", (dialog, which) -> dialog.dismiss());
+        timePickerDialog.setButton(TimePickerDialog.BUTTON_NEGATIVE, "Cancelar", (dialog, which) -> dialog.dismiss());
+        timePickerDialog.show();
     }
 
     private void createNote() {
-        // Recuperar el ID del usuario desde SharedPreferences
-        SharedPreferences preferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        String userId = preferences.getString("userId", null); // Si no existe, devuelve null
+        String title = ((EditText) findViewById(R.id.titleInput)).getText().toString();
+        String description = ((EditText) findViewById(R.id.descInput)).getText().toString();
 
-        if (userId != null) { // Verifica que el usuario esté autenticado
-            // Crear un nuevo objeto Note
-            Note newNote = new Note();
-            newNote.setTitle("Mi Nota");
-            newNote.setDescription("Descripción de la nota");
-            newNote.setDate(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date()));
-            newNote.setHour(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date()));
-            newNote.setImage(currentPhotoPath);
+        if (title.isEmpty() || description.isEmpty()) {
+            Toast.makeText(this, "Por favor, ingrese todos los campos", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-            // Convertir el userId a Long antes de pasarlo al constructor de User
-            Long userIdLong = Long.parseLong(userId);
+        String date = new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault()).format(new java.util.Date());
+        String hour = String.format("%02d:%02d", selectedHour, selectedMinute);
 
-            // Asignar el usuario actual a la nota
-            newNote.setUser(new User(userIdLong)); // Ahora pasamos Long en lugar de String
+        SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        long userId = prefs.getLong("user", -1);
 
-            // Si la nota no pertenece a un grupo, puedes omitir este paso
-            // newNote.setGroup(new Group(1)); // Si es necesario, asigna el grupo
+        if (userId == -1L) {
+            Toast.makeText(this, "Error al obtener el ID del usuario", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-            // Enviar la solicitud para crear la nota
-            apiService.createNote(newNote).enqueue(new Callback<Note>() {
-                @Override
-                public void onResponse(Call<Note> call, Response<Note> response) {
-                    if (response.isSuccessful()) {
-                        Toast.makeText(newNote.this, "Nota creada con éxito", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(newNote.this, "Error al crear la nota", Toast.LENGTH_SHORT).show();
-                    }
+        // Convertir la latitud y longitud a String
+        String latitudeStr = String.format("%.6f", latitude); // Usamos formato adecuado para coordenadas
+        String longitudeStr = String.format("%.6f", longitude);
+
+        // Crear la ubicación con las coordenadas como Strings
+        com.example.ucompensareasytaskas.api.model.Location location = new com.example.ucompensareasytaskas.api.model.Location("Ubicación", latitudeStr, longitudeStr);
+
+        // Crear la nueva nota
+        Note newNote = new Note();
+        newNote.setTitle(title);
+        newNote.setDescription(description);
+        newNote.setDate(date);
+        newNote.setHour(hour);
+        newNote.setImage(currentPhotoPath);
+        newNote.setLocation(location);  // Usar tu Location personalizada con coordenadas como Strings
+        newNote.setUser(new User(userId));
+
+        showCoordinatesDialog(title, latitudeStr, longitudeStr);
+
+        // Enviar la nota al servidor
+        apiService.createNote(userId, newNote).enqueue(new Callback<Note>() {
+            @Override
+            public void onResponse(Call<Note> call, Response<Note> response) {
+                if (response.isSuccessful()) {
+                    Note createdNote = response.body();
+                    // Handle success
+                    Toast.makeText(newNote.this, "Note created successfully", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Handle failure (e.g., bad request)
+                    String errorMessage = response.message();
+                    Toast.makeText(newNote.this, "Error: " + errorMessage, Toast.LENGTH_SHORT).show();
                 }
+            }
 
-                @Override
-                public void onFailure(Call<Note> call, Throwable t) {
-                    Toast.makeText(newNote.this, "Error en la solicitud: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
-        } else {
-            // Si no se ha encontrado el ID del usuario, significa que no ha iniciado sesión
-            Toast.makeText(newNote.this, "No se ha iniciado sesión. Por favor, inicia sesión primero.", Toast.LENGTH_SHORT).show();
+            @Override
+            public void onFailure(Call<Note> call, Throwable t) {
+                Toast.makeText(newNote.this, "Request failed: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void showCoordinatesDialog(String title, String latitude, String longitude) {
+        String message = "Nombre: " + title + "\nCoordenadas: Latitud: " + latitude + ", Longitud: " + longitude;
+
+        new AlertDialog.Builder(this)
+                .setTitle("Coordenadas de la ubicación")
+                .setMessage(message)
+                .setPositiveButton("Aceptar", (dialog, which) -> dialog.dismiss())
+                .show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);  // Call the superclass method
+
+        if (requestCode == REQUEST_LOCATION_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getLocation();
+            } else {
+                Toast.makeText(this, "Permiso de ubicación denegado", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
+

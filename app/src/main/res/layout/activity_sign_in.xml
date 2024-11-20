@@ -73,7 +73,17 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/custom_edittext"
                 android:ems="10"
-                android:hint="  Contraseña" />
+                android:hint="  Contraseña"
+                android:inputType="textPassword"/>
+            <Button
+                android:id="@+id/btnShowPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mostrar/Ocultar"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="8dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:textColor="@android:color/black"/>
 
             <Button
                 android:id="@+id/enter_button"

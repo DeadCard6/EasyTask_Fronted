@@ -53,4 +53,6 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.15.1") // Asegúrate de usar la última versión
     annotationProcessor ("com.github.bumptech.glide:compiler:4.15.1")
 
+    implementation ("com.wdullaer:materialdatetimepicker:4.2.3")
+
 }

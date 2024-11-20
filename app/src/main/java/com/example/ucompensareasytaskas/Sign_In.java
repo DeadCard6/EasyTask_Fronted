@@ -3,6 +3,7 @@ package com.example.ucompensareasytaskas;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,7 +26,7 @@ import retrofit2.Response;
 public class Sign_In extends AppCompatActivity {
 
     private EditText loginNumInput, loginPassInput;
-    private Button enterButton;
+    private Button enterButton, showPasswordButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,22 @@ public class Sign_In extends AppCompatActivity {
         loginNumInput = findViewById(R.id.loginNum_input);
         loginPassInput = findViewById(R.id.loginPass_input);
         enterButton = findViewById(R.id.enter_button);
+        showPasswordButton = findViewById(R.id.btnShowPassword);
+
+        // Lógica para mostrar/ocultar la contraseña
+        showPasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (loginPassInput.getInputType() == InputType.TYPE_TEXT_VARIATION_PASSWORD) {
+                    loginPassInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                } else {
+                    loginPassInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                }
+
+                // Mueve el cursor al final después de cambiar el tipo de input
+                loginPassInput.setSelection(loginPassInput.getText().length());
+            }
+        });
 
         enterButton.setOnClickListener(new View.OnClickListener() {
             @Override

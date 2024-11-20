@@ -21,8 +21,8 @@ public interface ApiService {
     @POST("/api/users/login")
     Call<ApiResponse> loginUser(@Body LoginRequest loginRequest);
 
-    @POST("/api/notes")
-    Call<Note> createNote(@Body Note note);
+    @POST("/api/notes/user/{userId}")
+    Call<Note> createNote(@Path("userId") long userId, @Body Note note);
 
     @GET("/api/notes/user/{userId}")
     Call<List<Note>> getNotesByUser(@Path("userId") Long userId);
