@@ -53,8 +53,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/custom_edittext"
                 android:ems="10"
-                android:hint="  Ej: 318234456"
-                android:inputType="number" />
+                android:hint="  Ej: 318234456" />
 
             <!-- LinearLayout horizontal para los botones -->
             <LinearLayout

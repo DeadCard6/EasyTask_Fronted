@@ -196,29 +196,6 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.03" />
 
-                <TextView
-                    android:id="@+id/title_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Titulo:"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.051"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.105" />
-
-                <TextView
-                    android:id="@+id/desc_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Descripcion:"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.058"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.161" />
 
                 <CalendarView
                     android:id="@+id/calendarView"
@@ -229,7 +206,7 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.542" />
+                    app:layout_constraintVertical_bias="0.594" />
 
                 <ImageButton
                     android:id="@+id/clock_button"
@@ -277,34 +254,30 @@
                     app:srcCompat="@drawable/ic_map_note" />
 
                 <EditText
-                    android:id="@+id/noteTitle_input"
-                    android:layout_width="201dp"
-                    android:layout_height="19dp"
-                    android:background="@drawable/custom_edittext_background"
-                    android:hint="Value"
-                    android:padding="10dp"
+                    android:id="@+id/titleInput"
+                    android:layout_width="311dp"
+                    android:layout_height="43dp"
+                    android:hint="Titulo"
+                    android:textColor="#000000"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.702"
+                    app:layout_constraintHorizontal_bias="0.421"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.105"
-                    tools:ignore="MissingConstraints" />
+                    app:layout_constraintVertical_bias="0.084" />
 
                 <EditText
-                    android:id="@+id/noteDescrip_input"
-                    android:layout_width="201dp"
-                    android:layout_height="19dp"
-                    android:background="@drawable/custom_edittext_background"
-                    android:hint="Value"
-                    android:padding="10dp"
+                    android:id="@+id/descInput"
+                    android:layout_width="312dp"
+                    android:layout_height="53dp"
+                    android:hint="Descripcion"
+                    android:textColor="#000000"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.702"
-                    app:layout_constraintStart_toStartOf="@+id/calendarView"
+                    app:layout_constraintHorizontal_bias="0.405"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.161"
-                    tools:ignore="MissingConstraints" />
+                    app:layout_constraintVertical_bias="0.173" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 

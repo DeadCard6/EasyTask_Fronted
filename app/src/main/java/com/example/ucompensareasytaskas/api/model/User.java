@@ -1,6 +1,7 @@
 package com.example.ucompensareasytaskas.api.model;
 
 public class User {
+    private Long id; // Agregamos el campo id de tipo Long
     private String name;
     private String secondName;
     private String password;
@@ -8,8 +9,11 @@ public class User {
     private String email;
     private String imgProfile;
 
-    // Constructor
-    public User(String name, String secondName, String password, String phoneNumber, String email, String imgProfile) {
+    public User() {
+    }
+
+    public User(Long id, String name, String secondName, String password, String phoneNumber, String email, String imgProfile) {
+        this.id = id;
         this.name = name;
         this.secondName = secondName;
         this.password = password;
@@ -18,7 +22,22 @@ public class User {
         this.imgProfile = imgProfile;
     }
 
-    // Getters and setters
+    public User(Long id) {
+        this.id = id;
+    }
+
+
+
+    // Getter y Setter para el campo id
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    // Otros getters y setters
     public String getName() {
         return name;
     }

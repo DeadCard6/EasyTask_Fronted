@@ -1,6 +1,7 @@
 package com.example.ucompensareasytaskas.Groups;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -26,6 +27,10 @@ import androidx.core.view.WindowInsetsCompat;
 import android.Manifest;
 
 import com.example.ucompensareasytaskas.R;
+import com.example.ucompensareasytaskas.api.ApiService;
+import com.example.ucompensareasytaskas.api.RetrofitClient;
+import com.example.ucompensareasytaskas.api.model.Note;
+import com.example.ucompensareasytaskas.api.model.User;
 import com.example.ucompensareasytaskas.home;
 import com.example.ucompensareasytaskas.menu;
 
@@ -35,118 +40,139 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class newNote extends AppCompatActivity {
+
+    private ImageButton imageButton;
+    private String currentPhotoPath;
+    private final ApiService apiService = RetrofitClient.getApiService();
 
     private static final int REQUEST_IMAGE_GALLERY = 1;
     private static final int REQUEST_IMAGE_CAMERA = 2;
 
-    ImageButton groups_button;
-    ImageButton home_button;
-    ImageButton add_button;
-    ImageButton menu_button;
-    ImageButton imageButton; // Botón de selección de imagen
-    String currentPhotoPath; // Ruta de la imagen capturada
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_new_note);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
-        groups_button = findViewById(R.id.groups_button);
-        home_button = findViewById(R.id.home_button);
-        add_button = findViewById(R.id.add_button);
-        menu_button = findViewById(R.id.menu_button);
-        imageButton = findViewById(R.id.image_button);  // Botón para seleccionar imagen
+        imageButton = findViewById(R.id.image_button);
 
         imageButton.setOnClickListener(v -> showImagePickerDialog());
 
-        // Otros botones y eventos omitidos por brevedad
+        findViewById(R.id.confirmar_button).setOnClickListener(v -> createNote());
     }
 
-    // Mostrar opciones para seleccionar imagen o tomar foto
     private void showImagePickerDialog() {
         String[] options = {"Seleccionar de galería", "Tomar una foto"};
         new androidx.appcompat.app.AlertDialog.Builder(this)
                 .setTitle("Elige una opción")
                 .setItems(options, (dialog, which) -> {
                     if (which == 0) {
-                        // Seleccionar de la galería
-                        Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                        startActivityForResult(galleryIntent, REQUEST_IMAGE_GALLERY);
+                        selectImageFromGallery();
                     } else {
-                        // Tomar una foto con la cámara
                         dispatchTakePictureIntent();
                     }
                 })
                 .show();
     }
 
-    private void dispatchTakePictureIntent() {
-        // Verificar si el permiso de la cámara está concedido
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            // Solicitar permiso si no está concedido
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_IMAGE_CAMERA);
-        } else {
-            // Si el permiso ya está concedido, abrir la cámara
-            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                File photoFile = null;
-                try {
-                    photoFile = createImageFile();
-                } catch (IOException ex) {
-                    Toast.makeText(this, "Error al crear el archivo", Toast.LENGTH_SHORT).show();
-                }
+    private void selectImageFromGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, REQUEST_IMAGE_GALLERY);
+    }
 
-                if (photoFile != null) {
-                    Uri photoURI = FileProvider.getUriForFile(this, "com.example.ucompensareasytaskas.provider", photoFile);
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAMERA);
-                }
-            }
+    private void dispatchTakePictureIntent() {
+        File photoFile;
+        try {
+            photoFile = createImageFile();
+            Uri photoURI = FileProvider.getUriForFile(
+                    this,
+                    "com.example.ucompensareasytaskas.provider",
+                    photoFile
+            );
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+            startActivityForResult(intent, REQUEST_IMAGE_CAMERA);
+        } catch (IOException e) {
+            Toast.makeText(this, "Error al crear archivo de imagen", Toast.LENGTH_SHORT).show();
         }
     }
 
-
-    // Crear un archivo temporal para almacenar la imagen capturada
     private File createImageFile() throws IOException {
-        // Crear un nombre de archivo único
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(null);
         File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
+                "JPEG_" + timeStamp + "_",
+                ".jpg",
+                storageDir
         );
-
-        // Guardar la ruta del archivo para usarla posteriormente
         currentPhotoPath = image.getAbsolutePath();
         return image;
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_IMAGE_GALLERY && data != null) {
-                // Imagen seleccionada de la galería
                 Uri selectedImageUri = data.getData();
-                imageButton.setImageURI(selectedImageUri);  // Mostrar imagen seleccionada en el botón
+                imageButton.setImageURI(selectedImageUri);
+                currentPhotoPath = selectedImageUri.toString();
             } else if (requestCode == REQUEST_IMAGE_CAMERA) {
-                // Imagen capturada con la cámara
                 File file = new File(currentPhotoPath);
                 if (file.exists()) {
                     Uri uri = Uri.fromFile(file);
-                    imageButton.setImageURI(uri);  // Mostrar imagen capturada en el botón
+                    imageButton.setImageURI(uri);
                 }
             }
+        }
+    }
+
+    private void createNote() {
+        // Recuperar el ID del usuario desde SharedPreferences
+        SharedPreferences preferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        String userId = preferences.getString("userId", null); // Si no existe, devuelve null
+
+        if (userId != null) { // Verifica que el usuario esté autenticado
+            // Crear un nuevo objeto Note
+            Note newNote = new Note();
+            newNote.setTitle("Mi Nota");
+            newNote.setDescription("Descripción de la nota");
+            newNote.setDate(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date()));
+            newNote.setHour(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date()));
+            newNote.setImage(currentPhotoPath);
+
+            // Convertir el userId a Long antes de pasarlo al constructor de User
+            Long userIdLong = Long.parseLong(userId);
+
+            // Asignar el usuario actual a la nota
+            newNote.setUser(new User(userIdLong)); // Ahora pasamos Long en lugar de String
+
+            // Si la nota no pertenece a un grupo, puedes omitir este paso
+            // newNote.setGroup(new Group(1)); // Si es necesario, asigna el grupo
+
+            // Enviar la solicitud para crear la nota
+            apiService.createNote(newNote).enqueue(new Callback<Note>() {
+                @Override
+                public void onResponse(Call<Note> call, Response<Note> response) {
+                    if (response.isSuccessful()) {
+                        Toast.makeText(newNote.this, "Nota creada con éxito", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(newNote.this, "Error al crear la nota", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Note> call, Throwable t) {
+                    Toast.makeText(newNote.this, "Error en la solicitud: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            // Si no se ha encontrado el ID del usuario, significa que no ha iniciado sesión
+            Toast.makeText(newNote.this, "No se ha iniciado sesión. Por favor, inicia sesión primero.", Toast.LENGTH_SHORT).show();
         }
     }
 }

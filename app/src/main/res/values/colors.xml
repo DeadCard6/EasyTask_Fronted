@@ -6,4 +6,5 @@
     <color name="SUNRFACE">#FEF7FF</color>
     <color name="gris">#D9D9D9</color>
     <color name="sunrface_oscuro">#F3EDF7</color>
+    <color name="gray_background">#F0F0F0</color>
 </resources>

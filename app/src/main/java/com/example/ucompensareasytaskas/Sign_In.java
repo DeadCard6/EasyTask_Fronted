@@ -1,6 +1,7 @@
 package com.example.ucompensareasytaskas;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -65,34 +66,42 @@ public class Sign_In extends AppCompatActivity {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    // Aquí puedes manejar la respuesta del servidor en caso de éxito
-                    Toast.makeText(Sign_In.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    // Aquí manejamos la respuesta en caso de éxito
+                    ApiResponse apiResponse = response.body();
+                    String message = apiResponse.getMessage();
+                    Long userId = apiResponse.getUserId(); // Usamos Long para userId
+
+                    // Guardar el userId en SharedPreferences
+                    SharedPreferences preferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putLong("user", userId); // Guardamos el userId como Long
+                    editor.apply();
+
+                    // Mostrar mensaje de éxito
+                    Toast.makeText(Sign_In.this, message, Toast.LENGTH_SHORT).show();
 
                     // Ir a la siguiente pantalla (home)
                     Intent intent = new Intent(Sign_In.this, home.class);
                     startActivity(intent);
+                    finish(); // Esto asegura que no puedas volver a la pantalla de login al presionar el botón de retroceso
                 } else {
                     // Manejar error en la autenticación
                     try {
                         // Leer el cuerpo de la respuesta para mostrar el mensaje de error
                         String errorResponse = response.errorBody().string();
-                        Toast.makeText(Sign_In.this, errorResponse, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Sign_In.this, "Error: " + errorResponse, Toast.LENGTH_SHORT).show();
                     } catch (IOException e) {
                         e.printStackTrace();
+                        Toast.makeText(Sign_In.this, "Error al procesar la respuesta", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
 
-
-
-
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {
-                // Manejar fallo de conexión o excepciones
-                Log.e("API Error", t.getMessage());
-                Toast.makeText(Sign_In.this, "Fallo en la conexión: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                // Manejar error en la solicitud
+                Toast.makeText(Sign_In.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 }
