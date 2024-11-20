@@ -7,6 +7,7 @@ import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -26,7 +27,12 @@ import retrofit2.Response;
 public class Sign_In extends AppCompatActivity {
 
     private EditText loginNumInput, loginPassInput;
+
     private Button enterButton, showPasswordButton;
+
+    private CheckBox showPasswordCheckbox;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +42,7 @@ public class Sign_In extends AppCompatActivity {
         loginNumInput = findViewById(R.id.loginNum_input);
         loginPassInput = findViewById(R.id.loginPass_input);
         enterButton = findViewById(R.id.enter_button);
+
         showPasswordButton = findViewById(R.id.btnShowPassword);
 
         // Lógica para mostrar/ocultar la contraseña
@@ -53,11 +60,22 @@ public class Sign_In extends AppCompatActivity {
             }
         });
 
+        showPasswordCheckbox = findViewById(R.id.show_password);
+
+
         enterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 loginUser();
             }
+        });
+        showPasswordCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                loginPassInput.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            } else {
+                loginPassInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            }
+            loginPassInput.setSelection(loginPassInput.length()); // Mantiene el cursor al final del texto
         });
     }
 

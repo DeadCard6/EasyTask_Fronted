@@ -7,6 +7,8 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.provider.MediaStore;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
@@ -59,6 +61,63 @@ public class newNote extends AppCompatActivity {
     private void checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
+
+        imageButton.setOnClickListener(v -> showImagePickerDialog());
+        menu_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(newNote.this, menu.class);
+                startActivity(i);
+            }
+        });
+        groups_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(newNote.this, HomeGroups.class);
+                startActivity(i);
+            }
+        });
+        home_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(newNote.this, home.class);
+                startActivity(i);
+            }
+        });
+        add_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(newNote.this, newNote.class);
+                startActivity(i);
+            }
+        });
+        // Otros botones y eventos omitidos por brevedad
+    }
+
+
+    // Mostrar opciones para seleccionar imagen o tomar foto
+    private void showImagePickerDialog() {
+        String[] options = {"Seleccionar de galería", "Tomar una foto"};
+        new androidx.appcompat.app.AlertDialog.Builder(this)
+                .setTitle("Elige una opción")
+                .setItems(options, (dialog, which) -> {
+                    if (which == 0) {
+                        // Seleccionar de la galería
+                        Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(galleryIntent, REQUEST_IMAGE_GALLERY);
+                    } else {
+                        // Tomar una foto con la cámara
+                        dispatchTakePictureIntent();
+                    }
+                })
+                .show();
+    }
+
+    private void dispatchTakePictureIntent() {
+        // Verificar si el permiso de la cámara está concedido
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            // Solicitar permiso si no está concedido
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_IMAGE_CAMERA);
         } else {
             getLocation();
         }
@@ -191,6 +250,7 @@ public class newNote extends AppCompatActivity {
                 Toast.makeText(this, "Permiso de ubicación denegado", Toast.LENGTH_SHORT).show();
             }
         }
+
     }
 }
 

@@ -32,20 +32,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/menu_button"
-        android:layout_width="69dp"
-        android:layout_height="66dp"
-        android:contentDescription="menu_button_description"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="10dp"
-        android:background="#00FFFFFF"
-        android:scaleType="fitCenter"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_menu" />
-
-    <ImageButton
         android:id="@+id/profile_button"
         android:layout_width="54dp"
         android:layout_height="66dp"
@@ -61,6 +47,7 @@
         app:srcCompat="@drawable/ic_profile" />
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:background="#ECE6F0"
@@ -76,9 +63,9 @@
             <ImageButton
                 android:id="@+id/add_button"
                 android:layout_width="56dp"
-                android:contentDescription="add_button_description"
                 android:layout_height="48dp"
                 android:background="#00FFFFFF"
+                android:contentDescription="add_button_description"
                 android:scaleType="fitCenter"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -125,12 +112,13 @@
         tools:layout_editor_absoluteY="272dp">
 
         <ScrollView
+            android:id="@+id/scrollView2"
             android:layout_width="353dp"
             android:layout_height="407dp"
-            tools:layout_editor_absoluteX="29dp"
             android:contentDescription="home_button_description"
-            tools:layout_editor_absoluteY="138dp"
-            tools:ignore="MissingConstraints">
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="29dp"
+            tools:layout_editor_absoluteY="138dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -139,6 +127,7 @@
         </ScrollView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="349dp"
             android:layout_height="550dp"
             app:cardElevation="8dp"
@@ -171,8 +160,8 @@
                     android:id="@+id/confirmar_button"
                     android:layout_width="151dp"
                     android:layout_height="54dp"
-                    android:contentDescription="confirmar_button_description"
                     android:background="#00FFFFFF"
+                    android:contentDescription="confirmar_button_description"
                     android:scaleType="fitCenter"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -213,10 +202,10 @@
                     android:layout_width="30dp"
                     android:layout_height="26dp"
                     android:background="#00FFFFFF"
+                    android:contentDescription="clock_button_description"
                     android:scaleType="fitCenter"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:contentDescription="clock_button_description"
                     app:layout_constraintHorizontal_bias="0.05"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -280,6 +269,21 @@
                     app:layout_constraintVertical_bias="0.173" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
+
+        <ImageButton
+            android:id="@+id/menu_button"
+            android:layout_width="69dp"
+            android:layout_height="66dp"
+            android:background="#00FFFFFF"
+            android:contentDescription="menu_button_description"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.005"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.005"
+            app:srcCompat="@drawable/ic_menu" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -59,7 +59,7 @@ public class profileUsername extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent i = new Intent(profileUsername.this, home.class);
+                Intent i = new Intent(profileUsername.this, confirmPassword.class);
                 startActivity(i);
             }
         });
