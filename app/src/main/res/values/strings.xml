@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Ucompensar.EasyTask.AS</string>
     <string name="google_sign_in_button_description">Sign in with Google</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDxcyL9EZC4LHQXM-IIkmgBeEZoppDlPSk</string>
 </resources>

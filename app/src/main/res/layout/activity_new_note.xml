@@ -1,70 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Groups.newNote">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="411dp"
-        android:layout_height="65dp"
-        android:background="#ECE6F0"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/brandname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="EasyTask"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/menu_button"
-        android:layout_width="69dp"
-        android:layout_height="66dp"
-        android:contentDescription="menu_button_description"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="10dp"
-        android:background="#00FFFFFF"
-        android:scaleType="fitCenter"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_menu" />
-
-    <ImageButton
-        android:id="@+id/profile_button"
-        android:layout_width="54dp"
-        android:layout_height="66dp"
-        android:contentDescription="profile_button_description"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="665dp"
-        android:background="#00FFFFFF"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_profile" />
+    android:background="@color/white"
+    tools:context=".home">
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:background="#ECE6F0"
-        android:orientation="horizontal"
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="71dp"
+        android:background="@color/SUNRFACE"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -76,10 +26,10 @@
             <ImageButton
                 android:id="@+id/add_button"
                 android:layout_width="56dp"
-                android:contentDescription="add_button_description"
                 android:layout_height="48dp"
                 android:background="#00FFFFFF"
                 android:scaleType="fitCenter"
+                android:contentDescription="add_button_description"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -105,181 +55,217 @@
                 android:layout_width="56dp"
                 android:layout_height="48dp"
                 android:background="#00FFFFFF"
-                android:contentDescription="groups_button_description"
                 android:scaleType="fitCenter"
+                android:contentDescription="groups_button_description"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.923"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.521"
                 app:srcCompat="@drawable/ic_groups" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </LinearLayout>
+    <androidx.cardview.widget.CardView
+        android:layout_width="349dp"
+        android:layout_height="550dp"
+        app:cardElevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="272dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <ScrollView
-            android:layout_width="353dp"
-            android:layout_height="407dp"
-            tools:layout_editor_absoluteX="29dp"
-            android:contentDescription="home_button_description"
-            tools:layout_editor_absoluteY="138dp"
-            tools:ignore="MissingConstraints">
+            <ImageButton
+                android:id="@+id/cancelar_button"
+                android:layout_width="151dp"
+                android:layout_height="54dp"
+                android:background="#00FFFFFF"
+                android:contentDescription="cancelar_button_description"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.08"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.964"
+                app:srcCompat="@drawable/ic_cancelar" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <ImageButton
+                android:id="@+id/confirmar_button"
+                android:layout_width="151dp"
+                android:layout_height="54dp"
+                android:contentDescription="confirmar_button_description"
+                android:background="#00FFFFFF"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.919"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.964"
+                app:srcCompat="@drawable/ic_confirmar" />
+
+            <TextView
+                android:id="@+id/functionName_text"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
-        </ScrollView>
+                android:text="Nueva Nota"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.065"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.03" />
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="349dp"
-            android:layout_height="550dp"
-            app:cardElevation="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.498">
+
+            <CalendarView
+                android:id="@+id/calendarView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.594" />
+
+            <ImageButton
+                android:id="@+id/clock_button"
+                android:layout_width="30dp"
+                android:layout_height="26dp"
+                android:background="#00FFFFFF"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:contentDescription="clock_button_description"
+                app:layout_constraintHorizontal_bias="0.05"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.828"
+                app:srcCompat="@drawable/ic_clock_note" />
+
+            <ImageButton
+                android:id="@+id/image_button"
+                android:layout_width="32dp"
+                android:layout_height="30dp"
+                android:background="#00FFFFFF"
+                android:contentDescription="image_button_description"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.175"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.834"
+                app:srcCompat="@drawable/ic_image_note" />
+
+            <ImageButton
+                android:id="@+id/map_button"
+                android:layout_width="34dp"
+                android:layout_height="30dp"
+                android:background="#00FFFFFF"
+                android:contentDescription="map_button_description"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.295"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.834"
+                app:srcCompat="@drawable/ic_map_note" />
+
+            <EditText
+                android:id="@+id/titleInput"
+                android:layout_width="311dp"
+                android:layout_height="43dp"
+                android:hint="Titulo"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.421"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.084" />
+
+            <EditText
+                android:id="@+id/descInput"
+                android:layout_width="312dp"
+                android:layout_height="53dp"
+                android:hint="Descripcion"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.405"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.173" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@color/SUNRFACE"
+            android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/Superior"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <ImageButton
-                    android:id="@+id/cancelar_button"
-                    android:layout_width="151dp"
-                    android:layout_height="54dp"
-                    android:background="#00FFFFFF"
-                    android:contentDescription="cancelar_button_description"
+                    android:id="@+id/profile_button"
+                    android:layout_width="93dp"
+                    android:layout_height="63dp"
+                    android:layout_marginTop="4dp"
+                    android:contentDescription="profile_button_description"
+                    android:background="@color/SUNRFACE"
                     android:scaleType="fitCenter"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.08"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.964"
-                    app:srcCompat="@drawable/ic_cancelar" />
+                    app:srcCompat="@drawable/profile_button" />
 
                 <ImageButton
-                    android:id="@+id/confirmar_button"
-                    android:layout_width="151dp"
-                    android:layout_height="54dp"
-                    android:contentDescription="confirmar_button_description"
-                    android:background="#00FFFFFF"
+                    android:id="@+id/menu_button"
+                    android:layout_width="130dp"
+                    android:layout_height="70dp"
+                    android:contentDescription="menu_button_description"
+                    android:background="@color/SUNRFACE"
                     android:scaleType="fitCenter"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.919"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.964"
-                    app:srcCompat="@drawable/ic_confirmar" />
-
-                <TextView
-                    android:id="@+id/functionName_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nueva Nota"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.065"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.03" />
-
-
-                <CalendarView
-                    android:id="@+id/calendarView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.594" />
+                    app:srcCompat="@drawable/menu_button" />
 
-                <ImageButton
-                    android:id="@+id/clock_button"
-                    android:layout_width="30dp"
-                    android:layout_height="26dp"
-                    android:background="#00FFFFFF"
-                    android:scaleType="fitCenter"
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Easytask"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:contentDescription="clock_button_description"
-                    app:layout_constraintHorizontal_bias="0.05"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.828"
-                    app:srcCompat="@drawable/ic_clock_note" />
-
-                <ImageButton
-                    android:id="@+id/image_button"
-                    android:layout_width="32dp"
-                    android:layout_height="30dp"
-                    android:background="#00FFFFFF"
-                    android:contentDescription="image_button_description"
-                    android:scaleType="fitCenter"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.175"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.834"
-                    app:srcCompat="@drawable/ic_image_note" />
-
-                <ImageButton
-                    android:id="@+id/map_button"
-                    android:layout_width="34dp"
-                    android:layout_height="30dp"
-                    android:background="#00FFFFFF"
-                    android:contentDescription="map_button_description"
-                    android:scaleType="fitCenter"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.295"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.834"
-                    app:srcCompat="@drawable/ic_map_note" />
-
-                <EditText
-                    android:id="@+id/titleInput"
-                    android:layout_width="311dp"
-                    android:layout_height="43dp"
-                    android:hint="Titulo"
-                    android:textColor="#000000"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.421"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.084" />
-
-                <EditText
-                    android:id="@+id/descInput"
-                    android:layout_width="312dp"
-                    android:layout_height="53dp"
-                    android:hint="Descripcion"
-                    android:textColor="#000000"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.405"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.173" />
+                    app:layout_constraintVertical_bias="0.509" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

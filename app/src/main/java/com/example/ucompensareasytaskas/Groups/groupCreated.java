@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +15,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.ucompensareasytaskas.R;
 import com.example.ucompensareasytaskas.home;
 import com.example.ucompensareasytaskas.menu;
+import com.example.ucompensareasytaskas.ubicaciones;
+import com.github.clans.fab.FloatingActionButton;
 
 public class groupCreated extends AppCompatActivity {
 
@@ -28,16 +31,28 @@ public class groupCreated extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_group_created);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
         groups_button=(ImageButton)findViewById(R.id.groups_button);
         home_button=(ImageButton)findViewById(R.id.home_button);
         add_button=(ImageButton)findViewById(R.id.add_button);
         group1_button=(ImageButton)findViewById(R.id.group1_button);
         menu_button=(ImageButton)findViewById(R.id.menu_button);
+
+        FloatingActionButton fabUbi = findViewById(R.id.fab_ubi);
+
+
+        // Configura el listener para el botón fabUbi
+        fabUbi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Acción para el botón de ubicación
+                Toast.makeText(groupCreated.this, "Botón Ubicación presionado", Toast.LENGTH_SHORT).show();
+
+                // Redirigir a la actividad ubicacion
+                Intent intent = new Intent(groupCreated.this, ubicaciones.class);
+                startActivity(intent);
+            }
+        });
 
         menu_button.setOnClickListener(new View.OnClickListener() {
             @Override

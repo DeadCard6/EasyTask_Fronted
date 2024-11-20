@@ -2,6 +2,7 @@ package com.example.ucompensareasytaskas.Groups;
 
 import android.Manifest;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -18,6 +19,10 @@ import com.example.ucompensareasytaskas.api.ApiService;
 import com.example.ucompensareasytaskas.api.RetrofitClient;
 import com.example.ucompensareasytaskas.api.model.Note;
 import com.example.ucompensareasytaskas.api.model.User;
+import com.example.ucompensareasytaskas.home;
+import com.example.ucompensareasytaskas.menu;
+import com.example.ucompensareasytaskas.ubicaciones;
+
 import android.location.LocationListener;
 import android.location.LocationManager;
 import java.text.SimpleDateFormat;
@@ -32,6 +37,7 @@ public class newNote extends AppCompatActivity {
 
     private ImageButton clockButton;
     private int selectedHour = 0;
+    private ImageButton groups_button, home_button, add_button, menu_button;
     private int selectedMinute = 0;
     private String currentPhotoPath = null;
     private static final int REQUEST_LOCATION_PERMISSION = 3;
@@ -45,6 +51,10 @@ public class newNote extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_note);
 
+        menu_button = findViewById(R.id.menu_button);
+        groups_button = findViewById(R.id.groups_button);
+        home_button = findViewById(R.id.home_button);
+        add_button = findViewById(R.id.add_button);
         clockButton = findViewById(R.id.clock_button);
 
         findViewById(R.id.map_button).setOnClickListener(v -> checkLocationPermission());
@@ -54,6 +64,26 @@ public class newNote extends AppCompatActivity {
         findViewById(R.id.confirmar_button).setOnClickListener(v -> createNote());
 
         getLocation();
+    }
+    private void setupButtonListeners() {
+        menu_button.setOnClickListener(view -> {
+            Intent i = new Intent(newNote.this, menu.class);
+            startActivity(i);
+        });
+        groups_button.setOnClickListener(view -> {
+            Intent i = new Intent(newNote.this, HomeGroups.class);
+            startActivity(i);
+        });
+
+        home_button.setOnClickListener(view -> {
+            Intent i = new Intent(newNote.this, home.class);
+            startActivity(i);
+        });
+
+        add_button.setOnClickListener(view -> {
+            Intent i = new Intent(newNote.this, newNote.class);
+            startActivity(i);
+        });
     }
 
     private void checkLocationPermission() {

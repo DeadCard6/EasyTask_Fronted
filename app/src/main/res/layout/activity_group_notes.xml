@@ -53,20 +53,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.185" />
 
-        <ImageButton
-            android:id="@+id/func_button"
-            android:layout_width="101dp"
-            android:layout_height="82dp"
-            android:contentDescription="func_button_description"
-            android:background="#00FFFFFF"
-            android:scaleType="fitCenter"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.895"
-            app:srcCompat="@drawable/ic_function" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -180,5 +166,32 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/btn_flotante"
+        android:layout_width="63dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.862"
+        app:menu_colorNormal="@color/colorBotton"
+        app:menu_colorPressed="@color/colorBotton"
+        app:menu_fab_label="Menu">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_ubi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:src="@drawable/minubi"
+            app:fab_colorNormal="@color/colorBotton"
+            app:fab_colorPressed="@color/colorBotton"
+            app:fab_label="sub menu 3" />
+    </com.github.clans.fab.FloatingActionMenu>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

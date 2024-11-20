@@ -13,10 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ucompensareasytaskas.Groups.HomeGroups;
 import com.example.ucompensareasytaskas.Groups.NoteAdapter;
+import com.example.ucompensareasytaskas.Groups.groupNotes;
 import com.example.ucompensareasytaskas.Groups.newNote;
 import com.example.ucompensareasytaskas.api.ApiService;
 import com.example.ucompensareasytaskas.api.RetrofitClient;
 import com.example.ucompensareasytaskas.api.model.Note;
+import com.github.clans.fab.FloatingActionButton;
 
 import java.util.List;
 
@@ -43,6 +45,23 @@ public class home extends AppCompatActivity {
         // Inicialización de RecyclerView
         recyclerView = findViewById(R.id.recyclerViewNotes);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        FloatingActionButton fabUbi = findViewById(R.id.fab_ubi);
+
+
+        // Configura el listener para el botón fabUbi
+        fabUbi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Acción para el botón de ubicación
+                Toast.makeText(home.this, "Botón Ubicación presionado", Toast.LENGTH_SHORT).show();
+
+                // Redirigir a la actividad ubicacion
+                Intent intent = new Intent(home.this, ubicaciones.class);
+                startActivity(intent);
+            }
+        });
+
 
         // Obtener el userId desde SharedPreferences
         Long userId = getUserId();
